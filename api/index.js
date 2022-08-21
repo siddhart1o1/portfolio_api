@@ -14,6 +14,7 @@ const db = admin.firestore();
 
 app.use(express.json());
 app.use(cors());
+
 app.get("/", async (req, res) => {
   const snapshot = await db.collection("projects").get();
     const projects = snapshot.docs.map((doc) => doc.data());
@@ -24,6 +25,30 @@ app.get("/", async (req, res) => {
 
   res.json(projects);
 });
+
+
+app.get("/experience", async (req, res) => {
+  const snapshot = await db.collection("experience").get();
+  const projects = snapshot.docs.map((doc) => doc.data());
+  for (let i = 0; i < projects.length; i++) {
+    projects[i].id = snapshot.docs[i].id;
+  }
+  console.log(projects);
+  res.json(projects);
+});
+
+app.get("/about", async (req, res) => {
+  const snapshot = await db.collection("experience").get();
+  const projects = snapshot.docs.map((doc) => doc.data());
+  for (let i = 0; i < projects.length; i++) {
+    projects[i].id = snapshot.docs[i].id;
+  }
+  console.log(projects);
+  res.json(projects);
+});
+
+
+
 
 app.listen(5000);
 module.exports = app;
